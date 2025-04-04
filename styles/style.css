@@ -153,23 +153,27 @@ p {
   background-color: var(--primary-color);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-lg) var(--spacing-xl);
+  justify-content: space-around;
+  padding: var(--spacing-xl) var(--spacing-xl);
+  box-shadow: var(--box-shadow);
 }
 
 .navbar .logo-wrapper {
-  width: 65%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-around;
 }
 
-.navbar .logo-wrapper p {
-  margin-left: var(--spacing-md);
+.navbar .logo-wrapper img {
+  margin-right: var(--spacing-xl);
 }
 
 .navbar .nav-open {
   margin-right: var(--spacing-md);
+}
+
+#brand-text-logo {
+  margin-right: 0;
 }
 
 .navbar .nav-logo {
@@ -178,7 +182,7 @@ p {
 
 .navbar .nav-open,
 .nav-close {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   color: black;
   cursor: pointer;
@@ -189,7 +193,7 @@ p {
     position: fixed;
     top: 0;
     right: -100%;
-    background-color: hsla(50, 89%, 47%, 0.603);
+    background-color: var(--background-color);
     width: 33%;
     height: 100%;
     transition: right var(--transition-speed);
@@ -197,10 +201,13 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-shadow: var(--box-shadow);
   }
+}
 
-  .nav-menu .nav-logo {
-    margin-bottom: var(--spacing-xl);
+@media screen and (max-width: 640px) {
+  .nav-menu {
+    width: 50%;
   }
 }
 
@@ -209,25 +216,53 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 2rem;
+  row-gap: 2.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.navbar .nav-menu .nav-list .nav-link {
+.nav-link {
   text-decoration: none;
   font-family: var(--font-primary);
   color: var(--text-color);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  position: relative;
+  transition: 0.3s ease-in;
+}
+
+.nav-link::after {
+  content: "";
+  width: 2px;
+  height: 0;
+  background-color: var(--secondary-color);
+  position: absolute;
+  top: 0.5rem;
+  left: -0.5rem;
+  transition: all var(--transition-speed);
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.nav-link:hover::after {
+  height: 30%;
 }
 
 .nav-list .nav-close {
+  color: var(--primary-color);
+  font-size: 3rem;
   position: absolute;
   top: 0;
   right: 0;
   padding: var(--spacing-md) var(--spacing-md);
+  transition: var(--transition-speed);
+}
+
+.nav-list .nav-close:hover {
+  transform: scale(0.9);
 }
 
 .show-menu {
@@ -235,5 +270,6 @@ p {
 }
 
 .hide-nav-logo__close-icon {
-  display: none;
+  opacity: 0;
+  cursor: default;
 }
