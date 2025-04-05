@@ -5,6 +5,10 @@ const navClose = document.getElementById("nav-close");
 const navLogo = document.getElementById("nav-logo");
 const navLinks = document.querySelectorAll(".nav-link");
 const navSignInBtn = document.getElementById("nav-sign-in");
+// Shopping cart
+const shoppingCartBtn = document.querySelector(".shopping-cart-button");
+const shoppingCartCount = document.querySelector(".shopping-cart-count");
+
 // Form
 const signInForm = document.getElementById("signin-form");
 const signUpForm = document.getElementById("signup-form");
@@ -21,6 +25,7 @@ const toggleShowMenu = function () {
   navMenu.classList.toggle("show-menu");
   navOpen.classList.toggle("hide-nav-logo__close-icon");
   navLogo.classList.toggle("hide-nav-logo__close-icon");
+  shoppingCartBtn.classList.toggle("menu-open");
 };
 
 const toggleModalSignIn = function () {
@@ -48,6 +53,7 @@ modalClose.forEach((icon) =>
   icon.addEventListener("click", function (e) {
     const insideSignIn = e.target.closest("#modal-signin");
     const insideSignUp = e.target.closest("#modal-signup");
+    shoppingCartBtn.classList.toggle("modal-open");
 
     if (insideSignIn) {
       toggleModalSignIn();
@@ -63,9 +69,9 @@ modalClose.forEach((icon) =>
 
 // Sign in Modal
 navSignInBtn.addEventListener("click", function () {
-  console.log("AHOJ");
   toggleShowMenu();
   toggleModalSignIn();
+  shoppingCartBtn.classList.toggle("modal-open");
 });
 
 // Switch from Sign in to Sign up modal

@@ -109,14 +109,22 @@ p {
 
 .menu-card-item {
   background: white;
+  position: relative;
   height: 70%;
   max-width: 75%;
   margin-top: var(--spacing-xl);
   border-radius: var(--border-radius-md);
-  box-shadow: var(--box-shadow);
-  transition: var(--transition-speed);
   padding: var(--spacing-xl);
   text-align: center;
+  border: 2px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-card-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 0 0 0 3px rgba(247, 127, 0, 0.2);
+  z-index: 2; /* from earlier fix */
 }
 
 #brand-text-logo {
@@ -127,7 +135,7 @@ p {
 }
 
 .menu-card-item img {
-  height: 300px;
+  height: 80%;
   width: 80%;
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow);
@@ -150,7 +158,7 @@ p {
 
 .price__add-to-cart-button {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin: var(--spacing-lg);
 }
@@ -218,7 +226,7 @@ p {
   max-width: 400px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -292,10 +300,12 @@ p {
 /* Navbar */
 
 .navbar {
-  max-width: 1100px;
+  width: 100%;
   box-sizing: border-box;
+  position: fixed;
   background-color: var(--primary-color);
   display: flex;
+  z-index: 1000;
   align-items: center;
   justify-content: space-around;
   padding: var(--spacing-xl) var(--spacing-xl);
@@ -425,4 +435,118 @@ p {
 .hide-nav-logo__close-icon {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Floating Shopping cart */
+
+.shopping-cart-button {
+  position: absolute;
+  right: 10%;
+  top: 10rem;
+  background: var(--secondary-color);
+  padding: 0.3rem;
+  border-radius: 50%;
+  border: none;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  border: 2px solid var(--border-color);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  cursor: pointer;
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed), background-color var(--transition-speed),
+    right var(--transition-speed), opacity var(--transition-speed);
+}
+
+.menu-open {
+  right: 80%;
+}
+
+.modal-open {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shopping-cart-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: rgba(247, 127, 0, 0.1);
+}
+
+.shopping-cart-button:hover .shopping-cart-count {
+  transform: translate(50%, -50%) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: rgba(247, 127, 0, 0.8);
+}
+
+.shopping-cart-button:active {
+  transform: scale(0.95);
+}
+
+.shopping-cart-button img {
+  height: 50px;
+}
+
+.shopping-cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 2px solid var(--border-color);
+  transform: translate(50%, -50%);
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.25rem 0.45rem;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: var(--transition-speed);
+}
+
+/* Hero */
+
+.hero {
+  background-image: url("/images/main-burger.jpg");
+  background-size: cover;
+  background-position: 70% 30%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 3rem; /* scale up for desktop later */
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  letter-spacing: 5px;
+}
+
+/* Menu section */
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-section h2 {
+  font-size: 4rem;
+  margin: calc(var(--spacing-xl) * 2) 0 var(--spacing-md) 0;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+}
+
+.menu-section .menu-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 4rem;
 }
