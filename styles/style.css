@@ -247,7 +247,8 @@ p {
   font-size: 2rem;
 }
 
-.modal .modal-close {
+.modal .modal-close,
+.confirm-removal-modal .modal-close {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -258,7 +259,8 @@ p {
   transition: var(--transition-speed);
 }
 
-.modal .modal-close:hover {
+.modal .modal-close:hover,
+.confirm-removal-modal .modal-close:hover {
   scale: 1.2;
 }
 
@@ -339,6 +341,7 @@ p {
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg)
     var(--spacing-md);
+  position: relative;
 }
 
 .shopping-cart-modal .shopping-cart-items .item-seperator {
@@ -381,6 +384,7 @@ p {
   align-items: center;
   justify-content: center;
   row-gap: 0.2rem;
+  margin-left: var(--spacing-xl);
 }
 
 .shopping-cart-modal
@@ -419,7 +423,7 @@ p {
   .shopping-cart-quantity-price {
   display: flex;
   flex-grow: 1;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   column-gap: 1.8rem;
 }
@@ -429,7 +433,7 @@ p {
   .shopping-cart-burger-item-quantity__price__img
   .shopping-cart-quantity-price
   span {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 400;
   color: white;
 }
@@ -440,8 +444,10 @@ p {
   .shopping-cart-quantity-price
   .price {
   color: white;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 400;
+  margin: auto;
+  /* margin-right: var(--spacing-xl); */
 }
 
 .shopping-cart-modal .shopping-cart-checkout {
@@ -462,7 +468,7 @@ p {
 }
 
 .shopping-cart-modal .shopping-cart-checkout p .price {
-  color: var(--accent-color);
+  color: white;
   font-size: 1.2rem;
   margin-left: var(--spacing-sm);
 }
@@ -479,6 +485,94 @@ p {
 .shopping-cart-modal .shopping-cart-checkout .primary-button:hover {
   background-color: var(--secondary-color);
   transform: translateY(-2px);
+}
+
+.remove-item {
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: var(--spacing-md) var(--spacing-md) 0 0;
+  border: none;
+  color: #fff;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+  transition: var(--transition-speed);
+}
+
+.remove-item:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Confirm removal modal */
+.confirm-removal-modal {
+  max-width: 400px;
+  width: 70%;
+  position: relative;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+}
+
+.confirm-removal-modal .modal-close {
+  color: var(--primary-color);
+}
+
+.confirm-removal-modal .modal-removal-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.confirm-removal-modal h3 {
+  font-size: 1.5rem;
+  margin: var(--spacing-sm);
+  letter-spacing: 1px;
+}
+
+.confirm-removal-modal p {
+  margin: 1rem 1rem;
+  text-align: center;
+  line-height: 1.4;
+  word-break: break-word; /* if names are really long */
+}
+
+.confirm-removal-modal .highlight {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.confirm-removal-modal .confirm-removal-btns {
+  display: flex;
+  justify-content: space-around;
+  padding: var(--spacing-lg);
+  align-items: center;
+  width: 100%;
+}
+
+.confirm-removal-modal .confirm-removal-btns .remove-button {
+  padding: var(--spacing-lg);
+}
+
+.confirm-removal-modal .confirm-removal-btns .cancel-button {
+  padding: var(--spacing-lg);
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-weight: 700;
 }
 
 @media (max-width: 480px) {

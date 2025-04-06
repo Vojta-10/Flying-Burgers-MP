@@ -40,7 +40,7 @@
       </div>
       <button class="shopping-cart-button" aria-label="Shopping cart">
         <img src="images/shopping-cart-icon.png" alt="shopping-cart-icon" />
-        <span class="shopping-cart-count">2</span>
+        <span class="shopping-cart-count" id="cart-count">0</span>
       </button>
     </nav>
 
@@ -112,70 +112,30 @@
     <div class="modal-overlay hidden" id="modal-shopping-cart">
       <div class="modal shopping-cart-modal">
         <h2>Your cart</h2>
-        <div class="shopping-cart-items">
-          <div class="shopping-cart-item">
-            <h3>Inferno</h3>
-            <div class="item-seperator"></div>
-            <div class="shopping-cart-burger-item-quantity__price__img">
-              <img src="images/inferno-burger.jpg" alt="classic-burger" />
-              <div class="shopping-cart-quantity-price">
-                <div class="shopping-cart-item-quantity">
-                  <button class="shopping-cart-arrow arrow-up">
-                    <i class="ri-arrow-up-s-fill"></i>
-                  </button>
-                  <span>1</span>
-                  <button class="shopping-cart-arrow arrow-down">
-                    <i class="ri-arrow-down-s-fill"></i>
-                  </button>
-                </div>
-                <p class="price">189</p>
-              </div>
-            </div>
-          </div>
-          <div class="shopping-cart-item">
-            <h3>Sunrise</h3>
-            <div class="item-seperator"></div>
-            <div class="shopping-cart-burger-item-quantity__price__img">
-              <img src="images/sunrise-burger.jpg" alt="classic-burger" />
-              <div class="shopping-cart-quantity-price">
-                <div class="shopping-cart-item-quantity">
-                  <button class="shopping-cart-arrow arrow-up">
-                    <i class="ri-arrow-up-s-fill"></i>
-                  </button>
-                  <span>1</span>
-                  <button class="shopping-cart-arrow arrow-down">
-                    <i class="ri-arrow-down-s-fill"></i>
-                  </button>
-                </div>
-                <p class="price">189</p>
-              </div>
-            </div>
-          </div>
-          <div class="shopping-cart-item">
-            <h3>Smokey</h3>
-            <div class="item-seperator"></div>
-            <div class="shopping-cart-burger-item-quantity__price__img">
-              <img src="images/smokey-burger.jpg" alt="classic-burger" />
-              <div class="shopping-cart-quantity-price">
-                <div class="shopping-cart-item-quantity">
-                  <button class="shopping-cart-arrow arrow-up">
-                    <i class="ri-arrow-up-s-fill"></i>
-                  </button>
-                  <span>1</span>
-                  <button class="shopping-cart-arrow arrow-down">
-                    <i class="ri-arrow-down-s-fill"></i>
-                  </button>
-                </div>
-                <p class="price">189</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="shopping-cart-items"></div>
         <div class="shopping-cart-checkout">
           <p>
-            Total price: <span class="price">189<span>CZK</span></span>
+            Total price: <span class="price">0<span>CZK</span></span>
           </p>
           <button class="primary-button">Checkout</button>
+        </div>
+        <div class="close-icon modal-close">
+          <i class="ri-close-large-line"></i>
+        </div>
+      </div>
+    </div>
+    <div class="modal-overlay hidden" id="modal-confirm-removal">
+      <div class="confirm-removal-modal">
+        <div class="modal-removal-wrapper">
+          <h3>Confirm removal</h3>
+          <p class="confirm-text">
+            Are you sure you want to remove
+            <span class="highlight">Classic</span>
+          </p>
+          <div class="confirm-removal-btns">
+            <button class="secondary-button remove-button">Remove</button>
+            <button class="secondary-button cancel-button">Cancel</button>
+          </div>
         </div>
         <div class="close-icon modal-close">
           <i class="ri-close-large-line"></i>
@@ -193,31 +153,35 @@
       <div class="menu-items">
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <!-- <img src="images/classic-burger.jpg" alt="classic-burger"> -->
+          <!-- <img src="images/classic-burger.jpg" alt="classic-burger" /> -->
           <h3 class="section-title">Classic</h3>
           <p class="subtitle">
             Beef patty, cheddar cheese, lettuce, tomato, onion, ketchup, mustard
           </p>
           <div class="price__add-to-cart-button">
             <p class="price">189 <span>CZK</span></p>
-            <button class="primary-button">Add to cart</button>
+            <button class="primary-button add-to-cart" data-id="classic">
+              Add to cart
+            </button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <!-- <img src="images/cheese-bomb-burger.jpg" alt="classic-burger"> -->
+          <!-- <img src="images/cheese-bomb-burger.jpg" alt="classic-burger" /> -->
           <h3 class="section-title">Cheese Bomb</h3>
           <p class="subtitle">
             Double cheddar, mozzarella, gouda, crispy onions, garlic mayo
           </p>
           <div class="price__add-to-cart-button">
             <p class="price">219 <span>CZK</span></p>
-            <button class="primary-button">Add to cart</button>
+            <button class="primary-button add-to-cart" data-id="cheesebomb">
+              Add to cart
+            </button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <!-- <img src="images/sunrise-burger.jpg" alt="classic-burger"> -->
+          <!-- <img src="images/sunrise-burger.jpg" alt="classic-burger" /> -->
           <h3 class="section-title">Sunrise</h3>
           <p class="subtitle">
             Beef patty, fried egg, bacon, cheddar, caramelized onions, sriracha
@@ -225,36 +189,42 @@
           </p>
           <div class="price__add-to-cart-button">
             <p class="price">239 <span>CZK</span></p>
-            <button class="primary-button">Add to cart</button>
+            <button class="primary-button add-to-cart" data-id="sunrise">
+              Add to cart
+            </button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <!-- <img src="images/inferno-burger.jpg" alt="classic-burger"> -->
+          <!-- <img src="images/inferno-burger.jpg" alt="classic-burger" /> -->
           <h3 class="section-title">Inferno</h3>
           <p class="subtitle">
             Spicy beef, jalapeños, pepper jack cheese, chili mayo, lettuce
           </p>
           <div class="price__add-to-cart-button">
             <p class="price">209 <span>CZK</span></p>
-            <button class="primary-button">Add to cart</button>
+            <button class="primary-button add-to-cart" data-id="inferno">
+              Add to cart
+            </button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <!-- <img src="images/smokey-burger.jpg" alt="classic-burger"> -->
+          <!-- <img src="images/smokey-burger.jpg" alt="classic-burger" /> -->
           <h3 class="section-title">Smokey</h3>
           <p class="subtitle">
             Smoked bacon, BBQ sauce, cheddar, crispy onions, pickles
           </p>
           <div class="price__add-to-cart-button">
             <p class="price">229 <span>CZK</span></p>
-            <button class="primary-button">Add to cart</button>
+            <button class="primary-button add-to-cart" data-id="smokey">
+              Add to cart
+            </button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <!-- <img src="images/veggie-burger.jpg" alt="classic-burger"> -->
+          <!-- <img src="images/veggie-burger.jpg" alt="classic-burger" /> -->
           <h3 class="section-title">Veggie Crunch</h3>
           <p class="subtitle">
             Grilled veggie patty, avocado, lettuce, tomato, vegan mayo, red
@@ -262,11 +232,13 @@
           </p>
           <div class="price__add-to-cart-button">
             <p class="price">179 <span>CZK</span></p>
-            <button class="primary-button">Add to cart</button>
+            <button class="primary-button add-to-cart" data-id="veggiecrunch">
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
     </section>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
   </body>
 </html>
