@@ -18,6 +18,7 @@ const modalClose = document.querySelectorAll(".modal-close");
 const modalOverlaySignIn = document.getElementById("modal-signin");
 const modalOverlaySignUp = document.getElementById("modal-signup");
 const modalChangeSignFormBtn = document.querySelectorAll(".change-sign-form");
+const modalShoppingCart = document.getElementById("modal-shopping-cart");
 
 // Functions
 
@@ -36,6 +37,10 @@ const toggleModalSignUp = function () {
   modalOverlaySignUp.classList.toggle("active");
   modalOverlaySignUp.classList.toggle("hidden");
 };
+const toggleModalShoppingCart = function () {
+  modalShoppingCart.classList.toggle("active");
+  modalShoppingCart.classList.toggle("hidden");
+};
 
 // Menu show
 navOpen.addEventListener("click", () => {
@@ -53,6 +58,7 @@ modalClose.forEach((icon) =>
   icon.addEventListener("click", function (e) {
     const insideSignIn = e.target.closest("#modal-signin");
     const insideSignUp = e.target.closest("#modal-signup");
+    const insideShoppingCart = e.target.closest("#modal-shopping-cart");
     shoppingCartBtn.classList.toggle("modal-open");
 
     if (insideSignIn) {
@@ -64,8 +70,18 @@ modalClose.forEach((icon) =>
       toggleModalSignUp();
       signUpForm.reset();
     }
+
+    if (insideShoppingCart) {
+      toggleModalShoppingCart();
+    }
   })
 );
+
+// Shopping cart modal
+shoppingCartBtn.addEventListener("click", function () {
+  toggleModalShoppingCart();
+  shoppingCartBtn.classList.toggle("modal-open");
+});
 
 // Sign in Modal
 navSignInBtn.addEventListener("click", function () {

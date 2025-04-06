@@ -17,12 +17,11 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- NAVBAR -->
     <nav class="navbar">
       <img id="nav-logo" class="nav-logo" src="images/logo.png" alt="logo" />
-      </div>
       <div id="nav-menu" class="nav-menu">
         <ul class="nav-list">
-
           <li><img class="nav-logo" src="images/logo.png" alt="logo" /></li>
           <div class="nav-page-links">
             <li><a class="nav-link" href="#home">Home</a></li>
@@ -33,34 +32,45 @@
           <div id="nav-close" class="close-icon">
             <i class="ri-close-large-line"></i>
           </div>
-          <button id="nav-sign-in" class="primary-button">
-            Sign in
-          </button>
+          <button id="nav-sign-in" class="primary-button">Sign in</button>
         </ul>
       </div>
       <div id="nav-open" class="nav-open">
         <i class="ri-menu-line"></i>
       </div>
       <button class="shopping-cart-button" aria-label="Shopping cart">
-        <img src="images/shopping-cart-icon.png" alt="shopping-cart-icon">
+        <img src="images/shopping-cart-icon.png" alt="shopping-cart-icon" />
         <span class="shopping-cart-count">2</span>
       </button>
     </nav>
+
+    <!-- MODALS -->
     <div class="modal-overlay hidden" id="modal-signin">
       <div class="modal">
         <h2>Sign in</h2>
         <form id="signin-form" action="/login" method="POST">
           <div class="modal-inputs">
-            <input class="input-field" type="email" name="email" placeholder="Email" autofocus required>
-            <input class="input-field" type="password" name="password" placeholder="Password" required>
+            <input
+              class="input-field"
+              type="email"
+              name="email"
+              placeholder="Email"
+              autofocus
+              required
+            />
+            <input
+              class="input-field"
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
           </div>
           <button class="primary-button">Sign in</button>
         </form>
         <div class="sign-text">
           <p>Don't have an account?</p>
-          <button class="secondary-button change-sign-form">
-            Sign up
-          </button>
+          <button class="secondary-button change-sign-form">Sign up</button>
         </div>
         <div class="close-icon modal-close">
           <i class="ri-close-large-line"></i>
@@ -72,85 +82,186 @@
         <h2>Sign up</h2>
         <form id="signup-form" action="/register" method="POST">
           <div class="modal-inputs">
-            <input class="input-field" type="email" name="email" placeholder="Email" autofocus required>
-            <input class="input-field" type="password" name="password" placeholder="Password" required>
+            <input
+              class="input-field"
+              type="email"
+              name="email"
+              placeholder="Email"
+              autofocus
+              required
+            />
+            <input
+              class="input-field"
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
           </div>
           <button class="primary-button">Sign up</button>
         </form>
         <div class="sign-text">
           <p>Already have an account?</p>
-          <button class="secondary-button change-sign-form">
-            Sign in
-          </button>
+          <button class="secondary-button change-sign-form">Sign in</button>
         </div>
         <div class="close-icon modal-close">
           <i class="ri-close-large-line"></i>
         </div>
       </div>
     </div>
+    <div class="modal-overlay hidden" id="modal-shopping-cart">
+      <div class="modal shopping-cart-modal">
+        <h2>Your cart</h2>
+        <div class="shopping-cart-items">
+          <div class="shopping-cart-item">
+            <h3>Inferno</h3>
+            <div class="item-seperator"></div>
+            <div class="shopping-cart-burger-item-quantity__price__img">
+              <img src="images/inferno-burger.jpg" alt="classic-burger" />
+              <div class="shopping-cart-quantity-price">
+                <div class="shopping-cart-item-quantity">
+                  <button class="shopping-cart-arrow arrow-up">
+                    <i class="ri-arrow-up-s-fill"></i>
+                  </button>
+                  <span>1</span>
+                  <button class="shopping-cart-arrow arrow-down">
+                    <i class="ri-arrow-down-s-fill"></i>
+                  </button>
+                </div>
+                <p class="price">189</p>
+              </div>
+            </div>
+          </div>
+          <div class="shopping-cart-item">
+            <h3>Sunrise</h3>
+            <div class="item-seperator"></div>
+            <div class="shopping-cart-burger-item-quantity__price__img">
+              <img src="images/sunrise-burger.jpg" alt="classic-burger" />
+              <div class="shopping-cart-quantity-price">
+                <div class="shopping-cart-item-quantity">
+                  <button class="shopping-cart-arrow arrow-up">
+                    <i class="ri-arrow-up-s-fill"></i>
+                  </button>
+                  <span>1</span>
+                  <button class="shopping-cart-arrow arrow-down">
+                    <i class="ri-arrow-down-s-fill"></i>
+                  </button>
+                </div>
+                <p class="price">189</p>
+              </div>
+            </div>
+          </div>
+          <div class="shopping-cart-item">
+            <h3>Smokey</h3>
+            <div class="item-seperator"></div>
+            <div class="shopping-cart-burger-item-quantity__price__img">
+              <img src="images/smokey-burger.jpg" alt="classic-burger" />
+              <div class="shopping-cart-quantity-price">
+                <div class="shopping-cart-item-quantity">
+                  <button class="shopping-cart-arrow arrow-up">
+                    <i class="ri-arrow-up-s-fill"></i>
+                  </button>
+                  <span>1</span>
+                  <button class="shopping-cart-arrow arrow-down">
+                    <i class="ri-arrow-down-s-fill"></i>
+                  </button>
+                </div>
+                <p class="price">189</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shopping-cart-checkout">
+          <p>
+            Total price: <span class="price">189<span>CZK</span></span>
+          </p>
+          <button class="primary-button">Checkout</button>
+        </div>
+        <div class="close-icon modal-close">
+          <i class="ri-close-large-line"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
     <section class="hero">
       <h1 class="hero-title">Flying Burgers</h1>
     </section>
+    <!-- MENU -->
     <section id="menu" class="menu-section">
       <h2>Menu</h2>
       <div class="menu-items">
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <img src="images/classic-burger.jpg" alt="classic-burger">
-          <h3 class="section-title">Classic Burger</h3>
-          <p class="subtitle">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.</p>
+          <!-- <img src="images/classic-burger.jpg" alt="classic-burger"> -->
+          <h3 class="section-title">Classic</h3>
+          <p class="subtitle">
+            Beef patty, cheddar cheese, lettuce, tomato, onion, ketchup, mustard
+          </p>
           <div class="price__add-to-cart-button">
-            <p class="price">249 <span>CZK</span></p>
+            <p class="price">189 <span>CZK</span></p>
             <button class="primary-button">Add to cart</button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <img src="images/classic-burger.jpg" alt="classic-burger">
-          <h3 class="section-title">Classic Burger</h3>
-          <p class="subtitle">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.</p>
+          <!-- <img src="images/cheese-bomb-burger.jpg" alt="classic-burger"> -->
+          <h3 class="section-title">Cheese Bomb</h3>
+          <p class="subtitle">
+            Double cheddar, mozzarella, gouda, crispy onions, garlic mayo
+          </p>
           <div class="price__add-to-cart-button">
-            <p class="price">249 <span>CZK</span></p>
+            <p class="price">219 <span>CZK</span></p>
             <button class="primary-button">Add to cart</button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <img src="images/classic-burger.jpg" alt="classic-burger">
-          <h3 class="section-title">Classic Burger</h3>
-          <p class="subtitle">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.</p>
+          <!-- <img src="images/sunrise-burger.jpg" alt="classic-burger"> -->
+          <h3 class="section-title">Sunrise</h3>
+          <p class="subtitle">
+            Beef patty, fried egg, bacon, cheddar, caramelized onions, sriracha
+            mayo
+          </p>
           <div class="price__add-to-cart-button">
-            <p class="price">249 <span>CZK</span></p>
+            <p class="price">239 <span>CZK</span></p>
             <button class="primary-button">Add to cart</button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <img src="images/classic-burger.jpg" alt="classic-burger">
-          <h3 class="section-title">Classic Burger</h3>
-          <p class="subtitle">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.</p>
+          <!-- <img src="images/inferno-burger.jpg" alt="classic-burger"> -->
+          <h3 class="section-title">Inferno</h3>
+          <p class="subtitle">
+            Spicy beef, jalapeños, pepper jack cheese, chili mayo, lettuce
+          </p>
           <div class="price__add-to-cart-button">
-            <p class="price">249 <span>CZK</span></p>
+            <p class="price">209 <span>CZK</span></p>
             <button class="primary-button">Add to cart</button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <img src="images/classic-burger.jpg" alt="classic-burger">
-          <h3 class="section-title">Classic Burger</h3>
-          <p class="subtitle">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.</p>
+          <!-- <img src="images/smokey-burger.jpg" alt="classic-burger"> -->
+          <h3 class="section-title">Smokey</h3>
+          <p class="subtitle">
+            Smoked bacon, BBQ sauce, cheddar, crispy onions, pickles
+          </p>
           <div class="price__add-to-cart-button">
-            <p class="price">249 <span>CZK</span></p>
+            <p class="price">229 <span>CZK</span></p>
             <button class="primary-button">Add to cart</button>
           </div>
         </div>
         <div class="menu-card-item">
           <p id="brand-text-logo">Flying Burgers</p>
-          <img src="images/classic-burger.jpg" alt="classic-burger">
-          <h3 class="section-title">Classic Burger</h3>
-          <p class="subtitle">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.</p>
+          <!-- <img src="images/veggie-burger.jpg" alt="classic-burger"> -->
+          <h3 class="section-title">Veggie Crunch</h3>
+          <p class="subtitle">
+            Grilled veggie patty, avocado, lettuce, tomato, vegan mayo, red
+            onion
+          </p>
           <div class="price__add-to-cart-button">
-            <p class="price">249 <span>CZK</span></p>
+            <p class="price">179 <span>CZK</span></p>
             <button class="primary-button">Add to cart</button>
           </div>
         </div>
