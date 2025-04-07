@@ -4,7 +4,8 @@ const navOpen = document.getElementById("nav-open");
 const navClose = document.getElementById("nav-close");
 const navLogo = document.getElementById("nav-logo");
 const navLinks = document.querySelectorAll(".nav-link");
-const navSignInBtn = document.getElementById("nav-sign-in");
+
+const signInBtns = document.querySelectorAll(".sign-in");
 // Shopping cart
 const shoppingCartBtn = document.querySelector(".shopping-cart-button");
 const shoppingCartCount = document.querySelector(".shopping-cart-count");
@@ -124,11 +125,18 @@ shoppingCartBtn.addEventListener("click", function () {
 // Confirm removal modal
 
 // Sign in Modal
-navSignInBtn.addEventListener("click", function () {
-  toggleShowMenu();
-  toggleModalSignIn();
-  shoppingCartBtn.classList.toggle("modal-open");
-});
+signInBtns.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    if (e.target.closest(".nav-menu")) {
+      toggleModalSignIn();
+      toggleShowMenu();
+      shoppingCartBtn.classList.toggle("modal-open");
+    } else {
+      toggleModalSignIn();
+      shoppingCartBtn.classList.toggle("modal-open");
+    }
+  })
+);
 
 // Switch from Sign in to Sign up modal
 modalChangeSignFormBtn.forEach((btn) =>
@@ -313,7 +321,7 @@ cartContainer.addEventListener("click", function (e) {
   };
 
   // Update confirm modal text:
-  confirmText.innerHTML = `Are you sure you want to remove <br> <span class="highlight">${burgers[burgerId].name}</span>?`;
+  confirmText.innerHTML = `Are you sure you want to <br> remove <span class="highlight">${burgers[burgerId].name}</span>?`;
 
   // Show confirmation modal
   toggleModalConfirmRemoval();
