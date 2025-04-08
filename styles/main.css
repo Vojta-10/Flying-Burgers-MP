@@ -58,6 +58,10 @@ p {
   font-family: var(--font-primary);
 }
 
+button {
+  font-family: var(--font-primary);
+}
+
 /* Heading */
 .section-title {
   font-family: var(--font-heading);
@@ -331,7 +335,8 @@ p {
   box-sizing: border-box;
   padding: var(--spacing-lg) var(--spacing-md);
 }
-.shopping-cart-modal .shopping-cart-items .shopping-cart-item {
+.shopping-cart-modal .shopping-cart-items .shopping-cart-item,
+.shopping-cart-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -344,7 +349,8 @@ p {
   position: relative;
 }
 
-.shopping-cart-modal .shopping-cart-items .item-seperator {
+.shopping-cart-modal .shopping-cart-items .item-seperator,
+.item-seperator {
   width: 75%;
   height: 2px;
   background-color: var(--accent-color);
@@ -354,7 +360,8 @@ p {
 
 .shopping-cart-modal
   .shopping-cart-items
-  .shopping-cart-burger-item-quantity__price__img {
+  .shopping-cart-burger-item-quantity__price__img,
+.shopping-cart-burger-item-quantity__price__img {
   display: flex;
   justify-content: space-between;
   max-height: 80px;
@@ -367,7 +374,8 @@ p {
 .shopping-cart-modal
   .shopping-cart-items
   .shopping-cart-burger-item-quantity__price__img
-  img {
+  img,
+.shopping-cart-burger-item-quantity__price__img img {
   width: 25%;
   object-fit: cover;
   object-position: bottom;
@@ -378,7 +386,8 @@ p {
 .shopping-cart-modal
   .shopping-cart-items
   .shopping-cart-burger-item-quantity__price__img
-  .shopping-cart-item-quantity {
+  .shopping-cart-item-quantity,
+.shopping-cart-burger-item-quantity__price__img .shopping-cart-item-quantity {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -420,7 +429,8 @@ p {
 .shopping-cart-modal
   .shopping-cart-items
   .shopping-cart-burger-item-quantity__price__img
-  .shopping-cart-quantity-price {
+  .shopping-cart-quantity-price,
+.shopping-cart-quantity-price {
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
@@ -548,7 +558,7 @@ p {
   margin: 1rem 1rem;
   text-align: center;
   line-height: 1.4;
-  word-break: break-word; /* if names are really long */
+  word-break: break-word;
 }
 
 .highlight {

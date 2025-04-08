@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/checkout.css" />
+    <title>Checkout | Flying Burgers</title>
+  </head>
+  <body>
+    <!-- Order summmary -->
+    <section class="checkout-summary">
+      <h1>Order Summary</h1>
+      <div class="checkout-cart-item" data-id="cheesebomb">
+        <h3>Cheese Bomb</h3>
+        <div class="item-seperator"></div>
+        <div class="checkout-cart-quantity-price">
+          <p>Quantity: 2</p>
+          <p>Total burger price: <span class="price">438 CZK</span></p>
+        </div>
+      </div>
+      <div class="checkout-cart-item" data-id="cheesebomb">
+        <h3>Cheese Bomb</h3>
+        <div class="item-seperator"></div>
+        <div class="checkout-cart-quantity-price">
+          <p>Quantity: 2</p>
+          <p>Total burger price: <span class="price">438 CZK</span></p>
+        </div>
+      </div>
+      <button class="secondary-button">Change order</button>
+    </section>
+
+    <!-- 2. DELIVERY OPTION -->
+    <section class="checkout-section">
+      <h2>How would you like to receive your order?</h2>
+      <div class="option-toggle">
+        <div class="delivery-wrapper">
+          <label>
+            <input type="radio" name="delivery-type" value="delivery" checked />
+            <span class="custom-check">Delivery</span>
+          </label>
+          <label>
+            <input type="radio" name="delivery-type" value="pickup" />
+            <span class="custom-check">Pick-up</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PAYMENT OPTION -->
+    <section class="checkout-section">
+      <h2>How would you like to pay?</h2>
+      <div class="option-toggle">
+        <div class="delivery-wrapper">
+          <label>
+            <input type="radio" name="payment-method" value="card" checked />
+            <span class="custom-check">Card</span>
+          </label>
+          <label>
+            <input type="radio" name="payment-method" value="cash" />
+            <span class="custom-check">Cash</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. DELIVERY FORM & MAP (conditionally visible) -->
+    <section id="delivery-section" class="checkout-section hidden">
+      <h2>Delivery Address</h2>
+      <form id="delivery-form">
+        <input
+          type="text"
+          name="first-name"
+          placeholder="Enter your first name"
+          required
+        />
+        <input
+          type="text"
+          name="last-name"
+          placeholder="Enter your last name"
+          required
+        />
+        <input
+          type="text"
+          name="address"
+          placeholder="Enter your address"
+          required
+        />
+        <!-- Maybe more fields like city, zip, phone -->
+      </form>
+      <div id="map-container"></div>
+      <p class="delivery-fee">
+        Delivery fee: <span id="delivery-fee">-- CZK</span>
+      </p>
+    </section>
+
+    <!-- 5. FINAL BUTTON -->
+    <div class="checkout-footer">
+      <button class="finish-order-btn primary-button">Finish Order</button>
+    </div>
+
+    <div id="modal-order-summary" class="modal-overlay hidden">
+      <div class="modal">
+        <h2>Review Your Order</h2>
+        <div class="order-breakdown">
+          <!-- Dynamically filled with JS -->
+          <p><strong>Delivery type:</strong> Delivery / Pick-up</p>
+          <p><strong>Payment:</strong> Card / Cash</p>
+          <p><strong>Address:</strong> Burger Street 42 (if delivery)</p>
+          <p><strong>Delivery fee:</strong> 45 CZK (if delivery)</p>
+          <p><strong>Total:</strong> 468 CZK</p>
+        </div>
+        <div class="modal-actions">
+          <button class="cancel-modal-btn">Cancel</button>
+          <button class="confirm-order-btn">Confirm Order</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
