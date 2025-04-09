@@ -811,7 +811,7 @@ button {
 /* Hero */
 
 .hero {
-  background-image: url("/images/main-burger.jpg");
+  background-image: url("../images/main-burger.jpg");
   background-size: cover;
   background-position: 70% 30%;
   background-repeat: no-repeat;

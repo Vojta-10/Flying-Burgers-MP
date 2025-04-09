@@ -9,32 +9,32 @@ export const burgers = {
   classic: {
     name: "Classic",
     price: 189,
-    img: "images/classic-burger.jpg",
+    img: "../images/classic-burger.jpg",
   },
   cheesebomb: {
     name: "Cheese Bomb",
     price: 219,
-    img: "images/cheese-bomb-burger.jpg",
+    img: "../images/cheese-bomb-burger.jpg",
   },
   inferno: {
     name: "Inferno",
     price: 209,
-    img: "images/inferno-burger.jpg",
+    img: "../images/inferno-burger.jpg",
   },
   smokey: {
     name: "Smokey",
     price: 229,
-    img: "images/smokey-burger.jpg",
+    img: "../images/smokey-burger.jpg",
   },
   veggiecrunch: {
     name: "Veggie Crunch",
     price: 179,
-    img: "images/veggie-burger.jpg",
+    img: "../images/veggie-burger.jpg",
   },
   sunrise: {
     name: "Sunrise",
     price: 239,
-    img: "images/sunrise-burger.jpg",
+    img: "../images/sunrise-burger.jpg",
   },
 };
 
