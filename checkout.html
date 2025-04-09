@@ -13,6 +13,23 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/checkout.css" />
     <title>Checkout | Flying Burgers</title>
@@ -21,22 +38,7 @@
     <!-- Order summmary -->
     <section class="checkout-summary">
       <h1>Order Summary</h1>
-      <div class="checkout-cart-item" data-id="cheesebomb">
-        <h3>Cheese Bomb</h3>
-        <div class="item-seperator"></div>
-        <div class="checkout-cart-quantity-price">
-          <p>Quantity: 2</p>
-          <p>Total burger price: <span class="price">438 CZK</span></p>
-        </div>
-      </div>
-      <div class="checkout-cart-item" data-id="cheesebomb">
-        <h3>Cheese Bomb</h3>
-        <div class="item-seperator"></div>
-        <div class="checkout-cart-quantity-price">
-          <p>Quantity: 2</p>
-          <p>Total burger price: <span class="price">438 CZK</span></p>
-        </div>
-      </div>
+      <div class="summary-container"></div>
       <button class="secondary-button">Change order</button>
     </section>
 
@@ -46,11 +48,16 @@
       <div class="option-toggle">
         <div class="delivery-wrapper">
           <label>
-            <input type="radio" name="delivery-type" value="delivery" checked />
+            <input
+              type="radio"
+              name="radio-delivery-type"
+              value="Delivery"
+              checked
+            />
             <span class="custom-check">Delivery</span>
           </label>
           <label>
-            <input type="radio" name="delivery-type" value="pickup" />
+            <input type="radio" name="radio-delivery-type" value="Pick-up" />
             <span class="custom-check">Pick-up</span>
           </label>
         </div>
@@ -62,12 +69,12 @@
       <h2>How would you like to pay?</h2>
       <div class="option-toggle">
         <div class="delivery-wrapper">
-          <label>
-            <input type="radio" name="payment-method" value="card" checked />
+          <label id="delivery">
+            <input type="radio" name="payment-method" value="Card" checked />
             <span class="custom-check">Card</span>
           </label>
-          <label>
-            <input type="radio" name="payment-method" value="cash" />
+          <label id="pick-up">
+            <input type="radio" name="payment-method" value="Cash" />
             <span class="custom-check">Cash</span>
           </label>
         </div>
@@ -80,27 +87,22 @@
       <form id="delivery-form">
         <input
           type="text"
-          name="first-name"
+          name="delivery-type"
           placeholder="Enter your first name"
           required
         />
         <input
           type="text"
-          name="last-name"
+          name="delivery-type"
           placeholder="Enter your last name"
           required
         />
-        <input
-          type="text"
-          name="address"
-          placeholder="Enter your address"
-          required
-        />
+        <div id="address-input-wrapper"></div>
         <!-- Maybe more fields like city, zip, phone -->
       </form>
-      <div id="map-container"></div>
+      <div id="map" class="map-container"></div>
       <p class="delivery-fee">
-        Delivery fee: <span id="delivery-fee">-- CZK</span>
+        Delivery fee: <span id="delivery-fee">0 CZK</span>
       </p>
     </section>
 
@@ -113,18 +115,43 @@
       <div class="modal">
         <h2>Review Your Order</h2>
         <div class="order-breakdown">
-          <!-- Dynamically filled with JS -->
-          <p><strong>Delivery type:</strong> Delivery / Pick-up</p>
-          <p><strong>Payment:</strong> Card / Cash</p>
-          <p><strong>Address:</strong> Burger Street 42 (if delivery)</p>
-          <p><strong>Delivery fee:</strong> 45 CZK (if delivery)</p>
-          <p><strong>Total:</strong> 468 CZK</p>
+          <p>
+            Delivery type:
+            <span id="summary-delivery-type" class="order-info">Delivery</span>
+          </p>
+          <div class="order-seperator"></div>
+          <p>
+            Payment:
+            <span id="summary-payment" class="order-info">Card / Cash</span>
+          </p>
+          <div class="order-seperator"></div>
+          <p>
+            Address:
+            <span id="summary-address" class="order-info"
+              >Burger Street 42</span
+            >
+          </p>
+          <div class="order-seperator"></div>
+          <p>
+            Delivery fee:
+            <span id="summary-fee" class="order-info">45 CZK</span>
+          </p>
+          <div class="order-seperator"></div>
+          <p>
+            Total: <span id="summary-total" class="order-info">468 CZK</span>
+          </p>
         </div>
         <div class="modal-actions">
-          <button class="cancel-modal-btn">Cancel</button>
-          <button class="confirm-order-btn">Confirm Order</button>
+          <button class="cancel-modal-btn secondary-button">Cancel</button>
+          <button class="confirm-order-btn primary-button">
+            Confirm Order
+          </button>
+        </div>
+        <div class="close-icon modal-close">
+          <i class="ri-close-large-line"></i>
         </div>
       </div>
     </div>
+    <script src="js/checkout.js" defer></script>
   </body>
 </html>

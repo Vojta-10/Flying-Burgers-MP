@@ -52,6 +52,14 @@ body {
   margin: var(--spacing-lg) 0;
 }
 
+.checkout-summary .summary-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .checkout-summary .checkout-cart-item {
   background-color: var(--primary-color);
   /* margin: var(--spacing-xl); */
@@ -201,13 +209,23 @@ body {
   opacity: 0;
 }
 
+/* MAP */
+.map-container {
+  height: 400px;
+  width: 80%;
+  margin: calc(var(--spacing-xl) * 2) 0;
+  border-radius: var(--spacing-md);
+  overflow: hidden;
+}
+
 .checkout-section .delivery-fee {
   font-weight: 500;
   color: var(--text-color);
+  margin-top: var(--spacing-xl);
 }
 .checkout-section .delivery-fee span {
   font-weight: 800;
-  color: white;
+  color: var(--text-color);
   margin-left: var(--spacing-sm);
 }
 
@@ -222,4 +240,96 @@ body {
   padding: var(--spacing-xl) 0;
   font-size: 1.2rem;
   font-family: var(--font-primary);
+}
+
+.finish-order-btn:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+#address-input-wrapper {
+  max-width: 100%;
+  width: 100%;
+  box-shadow: none !important;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+#address-input-wrapper input {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+}
+
+.order-breakdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-breakdown .order-seperator {
+  background-color: var(--secondary-color);
+  height: 2px;
+  width: 100%;
+  align-self: center;
+  margin: var(--spacing-sm) 0;
+  border-radius: var(--border-radius-lg);
+  opacity: 0.6;
+}
+
+.order-breakdown p {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  letter-spacing: 0.5px;
+  align-items: center;
+  margin: var(--spacing-md);
+  font-weight: 700;
+}
+
+.order-breakdown .order-info {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: var(--spacing-xl);
+}
+
+.modal-actions .confirm-order-btn {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 470px) {
+  .order-breakdown p {
+    font-size: 0.8rem;
+  }
+
+  .modal .modal-close {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 410px) {
+  .modal-actions {
+    justify-content: space-between;
+  }
+
+  .modal-actions .confirm-order-btn {
+    font-size: 0.9rem;
+    padding: var(--spacing-md);
+  }
+
+  .modal-actions .cancel-modal-btn {
+    font-size: 0.9rem;
+  }
 }

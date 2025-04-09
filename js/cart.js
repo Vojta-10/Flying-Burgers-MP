@@ -49,6 +49,7 @@ export function updateCartCount(cartCountElement) {
 export function updateTotalPrice(checkoutPriceElement) {
   const total = cart.reduce((acc, item) => acc + item.price, 0);
   checkoutPriceElement.textContent = `${total} CZK`;
+  localStorage.setItem("totalPrice", JSON.stringify(total));
 }
 
 // =======================
@@ -121,6 +122,7 @@ export function addToCart(
 
   updateCartCount(cartCountElement);
   updateTotalPrice(checkoutPriceElement);
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 export function removeFromCart(
@@ -141,6 +143,7 @@ export function removeFromCart(
   );
   updateCartCount(cartCountElement);
   updateTotalPrice(checkoutPriceElement);
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 export function handleQuantityChange(
@@ -181,4 +184,5 @@ export function handleQuantityChange(
 
   updateCartCount(cartCountElement);
   updateTotalPrice(checkoutPriceElement);
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
