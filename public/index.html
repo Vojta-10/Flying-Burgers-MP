@@ -32,7 +32,8 @@
           <div id="nav-close" class="close-icon">
             <i class="ri-close-large-line"></i>
           </div>
-          <button class="primary-button sign-in">Sign in</button>
+          <button class="primary-button sign-in nav-signin">Sign in</button>
+          <button class="primary-button account-btn hidden">Account</button>
         </ul>
       </div>
       <div id="nav-open" class="nav-open">
@@ -48,10 +49,10 @@
     <div class="modal-overlay hidden" id="modal-signin">
       <div class="modal">
         <h2>Sign in</h2>
-        <form id="signin-form" action="/login" method="POST">
+        <form id="signin-form">
           <div class="modal-inputs">
             <input
-              class="input-field"
+              class="input-field email-signin"
               type="email"
               name="email"
               placeholder="Email"
@@ -59,12 +60,13 @@
               required
             />
             <input
-              class="input-field"
+              class="input-field password-signin"
               type="password"
               name="password"
               placeholder="Password"
               required
             />
+            <p class="invalid-message signin-msg hidden">Invalid Credentials</p>
           </div>
           <button class="primary-button">Sign in</button>
         </form>
@@ -80,23 +82,22 @@
     <div class="modal-overlay hidden" id="modal-signup">
       <div class="modal">
         <h2>Sign up</h2>
-        <form id="signup-form" action="/register" method="POST">
+        <form id="signup-form">
           <div class="modal-inputs">
             <input
-              class="input-field"
+              class="input-field email-signup"
               type="email"
               name="email"
               placeholder="Email"
               autofocus
-              required
             />
             <input
-              class="input-field"
+              class="input-field password-signup"
               type="password"
               name="password"
               placeholder="Password"
-              required
             />
+            <p class="invalid-message signup-msg hidden">Invalid Credentials</p>
           </div>
           <button class="primary-button">Sign up</button>
         </form>
@@ -135,6 +136,42 @@
           <div class="confirm-removal-btns">
             <button class="secondary-button remove-button">Remove</button>
             <button class="secondary-button cancel-button">Cancel</button>
+          </div>
+        </div>
+        <div class="close-icon modal-close">
+          <i class="ri-close-large-line"></i>
+        </div>
+      </div>
+    </div>
+    <div class="modal-overlay hidden" id="account-modal">
+      <div class="modal account">
+        <h3>Your account</h3>
+        <p>Email: <span class="account-email">vojtasvojto@email.cz</span></p>
+        <div class="modal-content">
+          <div class="address-wrapper">
+            <div class="address-content">
+              <label for="street">Street and No.</label>
+              <input
+                id="street"
+                name="street"
+                type="text"
+                placeholder="Main Street 123"
+              />
+            </div>
+            <div class="address-content">
+              <label for="city">Post code and city</label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                placeholder="68352 Saratice"
+              />
+            </div>
+          </div>
+          <p class="address-updated hidden"></p>
+          <div class="btn-wrapper">
+            <button class="secondary-button signout-btn">Sign out</button>
+            <button class="secondary-button update-btn">Update</button>
           </div>
         </div>
         <div class="close-icon modal-close">
@@ -361,6 +398,9 @@
       <p>© 2025 Flying Burgers. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/main.js" type="module"></script>
+    <script src="./js/account.js" type="module"></script>
   </body>
 </html>

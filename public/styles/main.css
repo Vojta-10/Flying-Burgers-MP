@@ -85,6 +85,10 @@ button {
   transition: var(--transition-speed);
 }
 
+.primary-button.hidden {
+  display: none;
+}
+
 .primary-button:hover {
   background-color: var(--secondary-color);
   transform: scale(1.1);
@@ -286,6 +290,17 @@ button {
   align-items: center;
 }
 
+.modal .modal-inputs .invalid-message {
+  color: var(--secondary-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: var(--spacing-xl);
+}
+
+.modal .modal-inputs .hidden {
+  display: none;
+}
+
 .modal form .primary-button {
   color: var(--text-color);
   font-weight: bold;
@@ -293,6 +308,7 @@ button {
   padding: var(--spacing-md) var(--spacing-lg);
   margin: var(--spacing-lg) 0 0 0;
   font-size: 1.2rem;
+  width: 45%;
 }
 .modal .sign-text {
   display: flex;
@@ -309,6 +325,93 @@ button {
 
 .modal .sign-text .secondary-button {
   margin-top: var(--spacing-sm);
+}
+
+/* Modal your account */
+.modal.account {
+  padding: var(--spacing-lg);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.modal.account h3 {
+  font-size: 2rem;
+  margin: var(--spacing-sm) 0 var(--spacing-sm) 0;
+}
+
+.modal.account p span {
+  color: white;
+  margin-left: var(--spacing-sm);
+}
+
+.modal.account .modal-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.accont .modal-content .address-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.address-updated {
+  color: darkgreen;
+  font-weight: 700;
+  height: 10px;
+}
+
+/* .address-updated.hidden {
+  display: none;
+} */
+
+.modal.account .modal-content .address-wrapper .address-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-lg);
+}
+
+.modal.account .modal-content .address-wrapper .address-content label {
+  font-family: var(--font-primary);
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.modal.account .modal-content .address-wrapper .address-content input {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  border: none;
+  box-shadow: var(--box-shadow);
+  margin-top: var(--spacing-sm);
+}
+
+.modal.account
+  .modal-content
+  .address-wrapper
+  .address-content
+  input:focus::placeholder {
+  opacity: 0;
+}
+
+.modal.account .modal-content .btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: var(--spacing-lg);
+}
+
+.modal.account .modal-content .btn-wrapper .update-btn {
+  background-color: var(--accent-color);
+  color: var(--text-color);
 }
 
 /* Modal Shopping cart */

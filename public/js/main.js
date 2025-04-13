@@ -6,146 +6,159 @@ import {
   updateCartCount,
   updateTotalPrice,
   handleQuantityChange,
-} from "./cart.js";
+} from './cart.js';
 
 // NAV
-const navMenu = document.getElementById("nav-menu");
-const navOpen = document.getElementById("nav-open");
-const navClose = document.getElementById("nav-close");
-const navLogo = document.getElementById("nav-logo");
-const navLinks = document.querySelectorAll(".nav-link");
+const navMenu = document.getElementById('nav-menu');
+const navOpen = document.getElementById('nav-open');
+const navClose = document.getElementById('nav-close');
+const navLogo = document.getElementById('nav-logo');
+const navLinks = document.querySelectorAll('.nav-link');
 
-const signInBtns = document.querySelectorAll(".sign-in");
+const signInBtns = document.querySelectorAll('.sign-in');
 // Shopping cart
-const shoppingCartBtn = document.querySelector(".shopping-cart-button");
-const cartContainer = document.querySelector(".shopping-cart-items");
-const cartCountElement = document.getElementById("cart-count");
+const shoppingCartBtn = document.querySelector('.shopping-cart-button');
+const cartContainer = document.querySelector('.shopping-cart-items');
+const cartCountElement = document.getElementById('cart-count');
 const checkoutPriceElement = document.querySelector(
-  ".shopping-cart-checkout .price"
+  '.shopping-cart-checkout .price'
 );
 
 // Confirm removal
-const confirmText = document.querySelector(".confirm-text");
-const removeBtn = document.querySelector(".remove-button");
-const cancelBtn = document.querySelector(".cancel-button");
+const confirmText = document.querySelector('.confirm-text');
+const removeBtn = document.querySelector('.remove-button');
+const cancelBtn = document.querySelector('.cancel-button');
 
 // Form
-const signInForm = document.getElementById("signin-form");
-const signUpForm = document.getElementById("signup-form");
+const signInForm = document.getElementById('signin-form');
+const signUpForm = document.getElementById('signup-form');
 
 // Modal
-const modalClose = document.querySelectorAll(".modal-close");
-const modalOverlaySignIn = document.getElementById("modal-signin");
-const modalOverlaySignUp = document.getElementById("modal-signup");
-const modalChangeSignFormBtn = document.querySelectorAll(".change-sign-form");
-const modalShoppingCart = document.getElementById("modal-shopping-cart");
-const modalConfirmRemoval = document.getElementById("confirm-modal");
+const modalClose = document.querySelectorAll('.modal-close');
+const modalOverlaySignIn = document.getElementById('modal-signin');
+const modalOverlaySignUp = document.getElementById('modal-signup');
+const modalChangeSignFormBtn = document.querySelectorAll('.change-sign-form');
+const modalShoppingCart = document.getElementById('modal-shopping-cart');
+const modalConfirmRemoval = document.getElementById('confirm-modal');
+const modalAccount = document.getElementById('account-modal');
+const modalAccountBtn = document.querySelector('.primary-button.account-btn');
 
 // Menu
-const addToCartBtns = document.querySelectorAll(".add-to-cart");
+const addToCartBtns = document.querySelectorAll('.add-to-cart');
 
 let itemToRemove = null;
 
 // Functions
 
 const toggleShowMenu = function () {
-  navMenu.classList.toggle("show-menu");
-  navOpen.classList.toggle("hide-nav-logo__close-icon");
-  navLogo.classList.toggle("hide-nav-logo__close-icon");
-  shoppingCartBtn.classList.toggle("menu-open");
+  navMenu.classList.toggle('show-menu');
+  navOpen.classList.toggle('hide-nav-logo__close-icon');
+  navLogo.classList.toggle('hide-nav-logo__close-icon');
+  shoppingCartBtn.classList.toggle('menu-open');
 };
 
 const toggleModalSignIn = function () {
-  modalOverlaySignIn.classList.toggle("active");
-  modalOverlaySignIn.classList.toggle("hidden");
+  modalOverlaySignIn.classList.toggle('active');
+  modalOverlaySignIn.classList.toggle('hidden');
 };
 const toggleModalSignUp = function () {
-  modalOverlaySignUp.classList.toggle("active");
-  modalOverlaySignUp.classList.toggle("hidden");
+  modalOverlaySignUp.classList.toggle('active');
+  modalOverlaySignUp.classList.toggle('hidden');
 };
 function toggleModalConfirmRemoval() {
-  modalConfirmRemoval.classList.toggle("active");
-  modalConfirmRemoval.classList.toggle("hidden");
+  modalConfirmRemoval.classList.toggle('active');
+  modalConfirmRemoval.classList.toggle('hidden');
+}
+
+function toggleModalAccount() {
+  modalAccount.classList.toggle('active');
+  modalAccount.classList.toggle('hidden');
 }
 
 const toggleModalShoppingCart = function () {
-  navMenu.classList.remove("show-menu");
-  navOpen.classList.remove("hide-nav-logo__close-icon");
-  navLogo.classList.remove("hide-nav-logo__close-icon");
-  shoppingCartBtn.classList.remove("menu-open");
-  modalShoppingCart.classList.toggle("active");
-  modalShoppingCart.classList.toggle("hidden");
+  navMenu.classList.remove('show-menu');
+  navOpen.classList.remove('hide-nav-logo__close-icon');
+  navLogo.classList.remove('hide-nav-logo__close-icon');
+  shoppingCartBtn.classList.remove('menu-open');
+  modalShoppingCart.classList.toggle('active');
+  modalShoppingCart.classList.toggle('hidden');
 };
 
 // Menu show
-navOpen.addEventListener("click", () => {
+navOpen.addEventListener('click', () => {
   toggleShowMenu();
 });
 
-navClose.addEventListener("click", () => {
+navClose.addEventListener('click', () => {
   toggleShowMenu();
 });
 
-navLinks.forEach((link) => link.addEventListener("click", toggleShowMenu));
+navLinks.forEach((link) => link.addEventListener('click', toggleShowMenu));
 
 // Modal close
 modalClose.forEach((icon) =>
-  icon.addEventListener("click", function (e) {
-    const insideSignIn = e.target.closest("#modal-signin");
-    const insideSignUp = e.target.closest("#modal-signup");
-    const insideShoppingCart = e.target.closest("#modal-shopping-cart");
-    const insideConfirmRemoval = e.target.closest("#confirm-modal");
+  icon.addEventListener('click', function (e) {
+    const insideSignIn = e.target.closest('#modal-signin');
+    const insideSignUp = e.target.closest('#modal-signup');
+    const insideShoppingCart = e.target.closest('#modal-shopping-cart');
+    const insideConfirmRemoval = e.target.closest('#confirm-modal');
+    const insideAccount = e.target.closest('#account-modal');
 
     if (insideSignIn) {
       toggleModalSignIn();
       signInForm.reset();
-      shoppingCartBtn.classList.toggle("modal-open");
+      shoppingCartBtn.classList.toggle('modal-open');
     }
 
     if (insideSignUp) {
       toggleModalSignUp();
       signUpForm.reset();
-      shoppingCartBtn.classList.toggle("modal-open");
+      shoppingCartBtn.classList.toggle('modal-open');
     }
 
     if (insideShoppingCart) {
       toggleModalShoppingCart();
-      shoppingCartBtn.classList.toggle("modal-open");
+      shoppingCartBtn.classList.toggle('modal-open');
     }
 
     if (insideConfirmRemoval) {
       toggleModalConfirmRemoval();
     }
+
+    if (insideAccount) {
+      toggleModalAccount();
+      shoppingCartBtn.classList.toggle('modal-open');
+    }
   })
 );
 
 // Shopping cart modal
-shoppingCartBtn.addEventListener("click", function () {
+shoppingCartBtn.addEventListener('click', function () {
   toggleModalShoppingCart();
-  shoppingCartBtn.classList.toggle("modal-open");
+  shoppingCartBtn.classList.toggle('modal-open');
 });
 
 // Confirm removal modal
 
 // Sign in Modal
 signInBtns.forEach((btn) =>
-  btn.addEventListener("click", function (e) {
-    if (e.target.closest(".nav-menu")) {
+  btn.addEventListener('click', function (e) {
+    if (e.target.closest('.nav-menu')) {
       toggleModalSignIn();
       toggleShowMenu();
-      shoppingCartBtn.classList.toggle("modal-open");
+      shoppingCartBtn.classList.toggle('modal-open');
     } else {
       toggleModalSignIn();
-      shoppingCartBtn.classList.toggle("modal-open");
+      shoppingCartBtn.classList.toggle('modal-open');
     }
   })
 );
 
 // Switch from Sign in to Sign up modal
 modalChangeSignFormBtn.forEach((btn) =>
-  btn.addEventListener("click", function (e) {
-    const insideSignIn = e.target.closest("#modal-signin");
-    const insideSignUp = e.target.closest("#modal-signup");
+  btn.addEventListener('click', function (e) {
+    const insideSignIn = e.target.closest('#modal-signin');
+    const insideSignUp = e.target.closest('#modal-signup');
 
     if (insideSignIn) {
       toggleModalSignIn();
@@ -165,9 +178,15 @@ modalChangeSignFormBtn.forEach((btn) =>
   })
 );
 
+// Account modal
+modalAccountBtn.addEventListener('click', () => {
+  toggleModalAccount();
+  toggleShowMenu();
+  shoppingCartBtn.classList.toggle('modal-open');
+});
 // Add to Cart Buttons
 addToCartBtns.forEach((button) => {
-  button.addEventListener("click", function () {
+  button.addEventListener('click', function () {
     const burgerId = this.dataset.id;
     const burger = burgers[burgerId];
     addToCart(burger, cartContainer, cartCountElement, checkoutPriceElement);
@@ -175,11 +194,11 @@ addToCartBtns.forEach((button) => {
 });
 
 // Remove Cart Item - Show Confirmation Modal
-cartContainer.addEventListener("click", function (e) {
-  const isRemove = e.target.closest(".remove-item");
+cartContainer.addEventListener('click', function (e) {
+  const isRemove = e.target.closest('.remove-item');
   if (!isRemove) return;
 
-  const cartItemEl = e.target.closest(".shopping-cart-item");
+  const cartItemEl = e.target.closest('.shopping-cart-item');
   const burgerId = cartItemEl.dataset.id;
 
   itemToRemove = {
@@ -192,7 +211,7 @@ cartContainer.addEventListener("click", function (e) {
 });
 
 // Confirm Removal
-removeBtn.addEventListener("click", () => {
+removeBtn.addEventListener('click', () => {
   if (!itemToRemove) return;
   toggleModalConfirmRemoval();
 
@@ -206,13 +225,13 @@ removeBtn.addEventListener("click", () => {
 });
 
 // Cancel Removal
-cancelBtn.addEventListener("click", () => {
+cancelBtn.addEventListener('click', () => {
   toggleModalConfirmRemoval();
   itemToRemove = null;
 });
 
 // Handle Quantity Change
-cartContainer.addEventListener("click", function (e) {
+cartContainer.addEventListener('click', function (e) {
   handleQuantityChange(
     e,
     cartContainer,
