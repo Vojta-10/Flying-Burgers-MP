@@ -6,6 +6,7 @@ import {
   updateCartCount,
   updateTotalPrice,
   handleQuantityChange,
+  loadCartFromLocalStorage,
 } from './cart.js';
 
 // NAV
@@ -41,7 +42,9 @@ const modalChangeSignFormBtn = document.querySelectorAll('.change-sign-form');
 const modalShoppingCart = document.getElementById('modal-shopping-cart');
 const modalConfirmRemoval = document.getElementById('confirm-modal');
 const modalAccount = document.getElementById('account-modal');
-const modalAccountBtn = document.querySelector('.primary-button.account-btn');
+const modalAccountBtns = document.querySelectorAll(
+  '.primary-button.account-btn'
+);
 
 // Menu
 const addToCartBtns = document.querySelectorAll('.add-to-cart');
@@ -179,11 +182,18 @@ modalChangeSignFormBtn.forEach((btn) =>
 );
 
 // Account modal
-modalAccountBtn.addEventListener('click', () => {
-  toggleModalAccount();
-  toggleShowMenu();
-  shoppingCartBtn.classList.toggle('modal-open');
+modalAccountBtns.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    if (e.target.closest('.footer-body')) {
+      toggleModalAccount();
+    } else {
+      toggleModalAccount();
+      toggleShowMenu();
+    }
+    shoppingCartBtn.classList.toggle('modal-open');
+  });
 });
+
 // Add to Cart Buttons
 addToCartBtns.forEach((button) => {
   button.addEventListener('click', function () {
@@ -243,3 +253,4 @@ cartContainer.addEventListener('click', function (e) {
 // Initialize cart price and count
 updateTotalPrice(checkoutPriceElement);
 updateCartCount(cartCountElement);
+loadCartFromLocalStorage(cartContainer, cartCountElement, checkoutPriceElement);

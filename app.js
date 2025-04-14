@@ -4,19 +4,26 @@ const express = require('express');
 const app = express();
 
 const cors = require('cors');
-app.use(cors());
+app.use(
+  cors({
+    // origin: 'http://127.0.0.1:5500',
+    // methods: ['GET', 'POST', 'PATCH', 'DELETE'], // pro jistotu
+    // allowedHeaders: ['Content-Type', 'Authorization'], // ← tohle je klíčové!
+  })
+);
 const orderAuth = require('./middleware/authentication');
 // ConnectDB
 const connectDB = require('./db/connect');
-
 // Routers
 const authRouter = require('./routes/auth');
 const orderRouter = require('./routes/orders');
+const userRouter = require('./routes/user');
 app.use(express.json());
 
 // Routes
 app.use('/auth', authRouter);
 app.use('/', orderAuth, orderRouter);
+app.use('/user', orderAuth, userRouter);
 
 app.use(express.static('./public'));
 

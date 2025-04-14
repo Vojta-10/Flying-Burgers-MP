@@ -3,6 +3,8 @@
   --primary-color: #f77f00; /* Warm Orange - Main Branding, Buttons */
   --secondary-color: #d62828; /* Rich Red - Accents, Highlights */
   --accent-color: #fcbf49; /* Golden Yellow - CTA Buttons, Pricing */
+  --success-color: #41e022;
+  --error-color: #f00c2e;
 
   --background-color: #fff8f0; /* Soft Beige - Page Background */
   --text-color: #2b2b2b; /* Dark Gray - Readability */
@@ -340,6 +342,10 @@ button {
   margin: var(--spacing-sm) 0 var(--spacing-sm) 0;
 }
 
+.modal.account p {
+  font-size: 1.1rem;
+}
+
 .modal.account p span {
   color: white;
   margin-left: var(--spacing-sm);
@@ -361,15 +367,16 @@ button {
   justify-content: center;
 }
 
-.address-updated {
-  color: darkgreen;
+.address-update-msg {
+  color: var(--success-color);
   font-weight: 700;
   height: 10px;
+  transition: var(--transition-speed);
 }
 
-/* .address-updated.hidden {
+.address-update-msg.hidden {
   display: none;
-} */
+}
 
 .modal.account .modal-content .address-wrapper .address-content {
   display: flex;
@@ -386,11 +393,14 @@ button {
 }
 
 .modal.account .modal-content .address-wrapper .address-content input {
-  padding: var(--spacing-sm);
+  padding: var(--spacing-lg);
   border-radius: var(--border-radius-lg);
   border: none;
   box-shadow: var(--box-shadow);
   margin-top: var(--spacing-sm);
+  width: 100%;
+  font-size: 1rem;
+  font-family: var(--font-primary);
 }
 
 .modal.account
@@ -407,6 +417,10 @@ button {
   justify-content: space-around;
   align-items: center;
   margin-top: var(--spacing-lg);
+}
+
+.modal.account .modal-content .btn-wrapper button {
+  padding: var(--spacing-md);
 }
 
 .modal.account .modal-content .btn-wrapper .update-btn {
@@ -1137,8 +1151,7 @@ button {
 .footer-section .footer-body {
   display: flex;
   box-sizing: border-box;
-  width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md);
 }
@@ -1236,5 +1249,19 @@ button {
 @media (max-width: 410px) {
   .footer-section .footer-body .primary-button {
     font-size: 0.7rem;
+    padding: var(--spacing-sm);
+    margin: 0;
+  }
+
+  .footer-section .nav-logo {
+    height: 50px;
+  }
+
+  .footer-section .footer-icons {
+    justify-content: space-around;
+  }
+
+  .footer-section .footer-icons .payment-icon {
+    height: 20px;
   }
 }

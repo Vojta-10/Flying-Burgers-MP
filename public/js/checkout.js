@@ -1,43 +1,73 @@
-"use strict";
-const deliveryFeeElement = document.getElementById("delivery-fee");
+'use strict';
+
+const deliveryFeeElement = document.getElementById('delivery-fee');
 const radioBtns = document.querySelectorAll('[name="radio-delivery-type"]');
 const contactInputs = document.querySelectorAll('[name="delivery-type"]');
-const addressInput = document.querySelector("#address-input-wrapper");
-const mapContainer = document.querySelector(".map-container");
-const finalizeBtn = document.querySelector(".finish-order-btn");
-const modalReviewOrder = document.getElementById("modal-order-summary");
-const modalClose = document.querySelector(".close-icon");
-const cancelReviewBtn = document.querySelector(".cancel-modal-btn");
-const confirmOrderBtn = document.querySelector(".confirm-order-btn");
-const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-const savedTotal = JSON.parse(localStorage.getItem("totalPrice")) || 0;
-const summaryContainer = document.querySelector(".summary-container");
+const addressInput = document.querySelector('#address-input-wrapper');
+const addressInputR = document.querySelector('.mapboxgl-ctrl-geocoder--input');
+const mapContainer = document.querySelector('.map-container');
+const finalizeBtn = document.querySelector('.finish-order-btn');
+const modalReviewOrder = document.getElementById('modal-order-summary');
+const modalClose = document.querySelector('.close-icon');
+const cancelReviewBtn = document.querySelector('.cancel-modal-btn');
+const confirmOrderBtn = document.querySelector('.confirm-order-btn');
+const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+const savedTotal = JSON.parse(localStorage.getItem('totalPrice')) || 0;
+const summaryContainer = document.querySelector('.summary-container');
 finalizeBtn.disabled = true;
 let isDelivery = false;
 
+const onload = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    if (savedCart.length === 0) {
+      window.location.href = '/public/index.html';
+    }
+    if (!token) {
+      return;
+    }
+    const {
+      data: {
+        user: { address },
+      },
+    } = await axios.get('http://localhost:3000/user/me', {
+      headers: {
+        Authorization: token,
+      },
+    });
+    console.log(address);
+    if (!address) return;
+    document.querySelector(
+      '.mapboxgl-ctrl-geocoder--input'
+    ).value = `${address}, Jihomoravský kraj, Česko`;
+  } catch (error) {
+    console.log(error);
+  }
+};
+document.addEventListener('DOMContentLoaded', onload);
 const toggleReviewOrderModal = function () {
-  modalReviewOrder.classList.toggle("active");
-  modalReviewOrder.classList.toggle("hidden");
+  modalReviewOrder.classList.toggle('active');
+  modalReviewOrder.classList.toggle('hidden');
 };
 
 const closeReviewModal = function () {
-  modalClose.addEventListener("click", toggleReviewOrderModal);
-  cancelReviewBtn.addEventListener("click", toggleReviewOrderModal);
+  modalClose.addEventListener('click', toggleReviewOrderModal);
+  cancelReviewBtn.addEventListener('click', toggleReviewOrderModal);
 };
 
 const openReviewModal = function () {
-  finalizeBtn.addEventListener("click", () => {
-    const deliveryFee = document.getElementById("delivery-fee").textContent;
+  finalizeBtn.addEventListener('click', () => {
+    const deliveryFee = document.getElementById('delivery-fee').textContent;
     const paymentMethod = document.querySelector(
       'input[name="payment-method"]:checked'
     ).value;
     const deliveryMethod = document.querySelector(
       'input[name="radio-delivery-type"]:checked'
     ).value;
-    if (deliveryMethod === "Delivery") isDelivery = true;
+    if (deliveryMethod === 'Delivery') isDelivery = true;
     const sumAddress = document
-      .querySelector(".mapboxgl-ctrl-geocoder--input")
-      .value.split(",")
+      .querySelector('.mapboxgl-ctrl-geocoder--input')
+      .value.split(',')
       .slice(0, 2);
 
     const [firstName, lastName] = [
@@ -63,25 +93,25 @@ const modalInfoFill = function (
   deliveryFee,
   total
 ) {
-  document.getElementById("summary-delivery-type").textContent = deliveryMethod;
-  document.getElementById("summary-payment").textContent = paymentMethod;
-  document.getElementById("summary-address").textContent = isDelivery
+  document.getElementById('summary-delivery-type').textContent = deliveryMethod;
+  document.getElementById('summary-payment').textContent = paymentMethod;
+  document.getElementById('summary-address').textContent = isDelivery
     ? address
-    : "Pick-up at restaurant";
-  document.getElementById("summary-fee").textContent = isDelivery
+    : 'Pick-up at restaurant';
+  document.getElementById('summary-fee').textContent = isDelivery
     ? `${deliveryFee}`
-    : "0 CZK";
-  document.getElementById("summary-total").textContent = `${total} CZK`;
+    : '0 CZK';
+  document.getElementById('summary-total').textContent = `${total} CZK`;
 };
 
 const orderSummaryFill = function (cart) {
   cart.forEach((order) => {
     summaryContainer.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       `<div class="checkout-cart-item" data-id="${order.name
         .toLowerCase()
-        .split(" ")
-        .join("")} ">
+        .split(' ')
+        .join('')} ">
       <h3>${order.name} </h3>
       <div class="item-seperator"></div>
       <div class="checkout-cart-quantity-price">
@@ -97,25 +127,25 @@ const orderSummaryFill = function (cart) {
 
 const radioBtnsChange = function () {
   radioBtns.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener('click', function (e) {
       const radioEl = e.target.closest('[name="radio-delivery-type"]');
-      if (radioEl.value === "Pick-up") {
-        addressInput.style.display = "none";
-        mapContainer.style.display = "none";
+      if (radioEl.value === 'Pick-up') {
+        addressInput.style.display = 'none';
+        mapContainer.style.display = 'none';
         deliveryFeeElement.textContent = `0 CZK`;
-        document.querySelector(".mapboxgl-ctrl-geocoder--input").value = "";
-        document.querySelector("#delivery-section h2").textContent =
-          "Contact info";
+        document.querySelector('.mapboxgl-ctrl-geocoder--input').value = '';
+        document.querySelector('#delivery-section h2').textContent =
+          'Contact info';
         if (inputFieldCheck(contactInputs)) finalizeBtn.disabled = false;
       } else {
-        addressInput.style.display = "inherit";
-        mapContainer.style.display = "inherit";
+        addressInput.style.display = 'inherit';
+        mapContainer.style.display = 'inherit';
         console.log(addressFieldCheck());
         if (!inputFieldCheck(contactInputs) || !addressFieldCheck()) {
           finalizeBtn.disabled = true;
         }
-        document.querySelector("#delivery-section h2").textContent =
-          "Delivery address";
+        document.querySelector('#delivery-section h2').textContent =
+          'Delivery address';
       }
     });
   });
@@ -132,12 +162,12 @@ const inputFieldCheck = function (inputArr) {
 };
 
 const updateFormValidation = () => {
-  const address = document.querySelector(".mapboxgl-ctrl-geocoder--input");
+  const address = document.querySelector('.mapboxgl-ctrl-geocoder--input');
   const allFields = [...contactInputs, address].filter(Boolean);
 
   allFields.forEach((input) => {
-    input.addEventListener("input", function () {
-      if (addressInput.style.display === "none") {
+    input.addEventListener('input', function () {
+      if (addressInput.style.display === 'none') {
         if (inputFieldCheck(contactInputs)) finalizeBtn.disabled = false;
         else finalizeBtn.disabled = true;
       } else {
@@ -151,7 +181,7 @@ const updateFormValidation = () => {
 
 const addressFieldCheck = function () {
   if (
-    document.querySelector(".mapboxgl-ctrl-geocoder--input").value.trim()
+    document.querySelector('.mapboxgl-ctrl-geocoder--input').value.trim()
       .length > 0
   ) {
     return true;
@@ -226,30 +256,30 @@ const restaurantLocation = {
   lon: 16.7843002,
 };
 mapboxgl.accessToken =
-  "pk.eyJ1Ijoidm9qdGFza29zNTgiLCJhIjoiY205YTNheW02MDE0djJsc2dwNm1hYW5vaiJ9.YIQvWNUOyYA1q_Mwnw589w";
+  'pk.eyJ1Ijoidm9qdGFza29zNTgiLCJhIjoiY205YTNheW02MDE0djJsc2dwNm1hYW5vaiJ9.YIQvWNUOyYA1q_Mwnw589w';
 
 const map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/mapbox/streets-v12",
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v12',
   center: [16.7875, 49.1222],
   zoom: 12,
 });
 
-new mapboxgl.Marker({ color: "#f77f00" })
+new mapboxgl.Marker({ color: '#f77f00' })
   .setLngLat([restaurantLocation.lon, restaurantLocation.lat])
   .addTo(map);
 
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
-  placeholder: "Search for your address",
+  placeholder: 'Search for your address',
   mapboxgl: mapboxgl,
   marker: false,
-  countries: "cz",
+  countries: 'cz',
 });
 
-geocoder.addTo("#address-input-wrapper");
+geocoder.addTo('#address-input-wrapper');
 
-geocoder.on("result", (e) => {
+geocoder.on('result', (e) => {
   const coords = e.result.geometry.coordinates;
   handleAddressSelection(coords);
 });
