@@ -32,7 +32,7 @@ const OrderSchema = new mongoose.Schema(
     },
     deliveryType: {
       type: String,
-      enum: ['delivery', 'pickup'],
+      enum: ['delivery', 'pick-up'],
       required: true,
     },
     paymentType: {

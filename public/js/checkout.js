@@ -17,6 +17,61 @@ const summaryContainer = document.querySelector('.summary-container');
 finalizeBtn.disabled = true;
 let isDelivery = false;
 
+const confirmOrder = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const cleanedCart = savedCart.map((item) => {
+      return {
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      };
+    });
+    const deliveryType = document
+      .getElementById('summary-delivery-type')
+      .textContent.toLowerCase();
+    const paymentMethod = document
+      .getElementById('summary-payment')
+      .textContent.toLowerCase();
+    const address = document
+      .getElementById('summary-address')
+      .textContent;
+    const deliveryFee = Number(
+      parseInt(document.getElementById('summary-fee').textContent.split(' ')[0])
+    );
+    const totalPrice = Number(
+      parseInt(
+        document.getElementById('summary-total').textContent.split(' ')[0]
+      )
+    );
+    console.log(deliveryFee, totalPrice);
+    const { data } = await axios.post(
+      'http://localhost:3000/order',
+      {
+        items: [...cleanedCart],
+        totalPrice,
+        deliveryType,
+        paymentType: paymentMethod,
+        address,
+        deliveryFee,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+confirmOrderBtn.addEventListener('click', async () => {
+  const data = await confirmOrder();
+  console.log(data);
+});
+
 const onload = async () => {
   try {
     const token = localStorage.getItem('token');

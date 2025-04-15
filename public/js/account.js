@@ -18,6 +18,8 @@ const streetNoInput = document.getElementById('street');
 const postCityInput = document.getElementById('city');
 const addressUpdateMsg = document.querySelector('.address-update-msg');
 const updateBtn = document.querySelector('.update-btn');
+const orderHistoryBtn = document.querySelector('.order-history-btn');
+const orderHistoryModal = document.getElementById('order-history-modal');
 
 const UIRequestSignin = function (token, email) {
   localStorage.setItem('token', `Bearer ${token}`);
@@ -44,6 +46,11 @@ const UIRequestSignup = function (token, email) {
     signinModal.classList.add('hidden');
     showAccountUI(email);
   }, 1000);
+};
+
+const showOrderHistoryModal = function () {
+  orderHistoryModal.classList.toggle('active');
+  orderHistoryModal.classList.toggle('hidden');
 };
 
 const showAccBtns = function () {
@@ -203,4 +210,72 @@ updateBtn.addEventListener('click', async function () {
       addressUpdateMsg.classList.add('hidden');
     }, 3000);
   } catch (error) {}
+});
+
+// Order history
+
+const orderHistory = async () => {
+  const token = localStorage.getItem('token');
+  const {
+    data: { orders },
+  } = await axios.get('http://localhost:3000/order-history', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  console.log(orders);
+  return orders;
+};
+
+orderHistoryBtn.addEventListener('click', async () => {
+  const orders = await orderHistory();
+  const orderContainer = document.querySelector('.order-history-content');
+
+  const allOrdersHtml = orders
+    .map((order) => {
+      // 1. Format the date
+      const orderDate = new Date(order.createdAt).toLocaleDateString('cs-CZ');
+
+      // 2. Generate items HTML
+      const itemsHTML = order.items
+        .map(
+          (item) => `
+      <div class="order-history-item-details">
+        <h4>${item.name}</h4>
+        <p>Price: <span class="price">${item.price} CZK</span></p>
+        <p>Quantity: <span class="quantity">${item.quantity}</span></p>
+      </div>
+    `
+        )
+        .join('');
+
+      // 3. Generate summary HTML
+      const summaryHTML = `
+      <div class="content-seperator"></div>
+      <div class="order-history-summary">
+        <h4>Order Summary</h4>
+        <div class="order-summary-desc">
+          <p>${order.totalPrice} CZK</p>
+          <p>${order.paymentType}</p>
+          <p>${order.deliveryType}</p>
+        </div>
+      </div>
+    `;
+
+      // 4. Combine all together
+      return `
+      <div class="order-history-item">
+        <h3>Order <span class="order-date">${orderDate}</span></h3>
+        <div class="content-seperator"></div>
+        <div class="order-history-desc">
+          ${itemsHTML}
+        </div>
+        ${summaryHTML}
+      </div>
+    `;
+    })
+    .join('');
+
+  orderContainer.insertAdjacentHTML('beforeend', allOrdersHtml);
+  showOrderHistoryModal();
 });

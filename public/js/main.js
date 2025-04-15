@@ -9,6 +9,8 @@ import {
   loadCartFromLocalStorage,
 } from './cart.js';
 
+const orderHistoryModal = document.getElementById('order-history-modal');
+
 // NAV
 const navMenu = document.getElementById('nav-menu');
 const navOpen = document.getElementById('nav-open');
@@ -73,6 +75,11 @@ function toggleModalConfirmRemoval() {
   modalConfirmRemoval.classList.toggle('hidden');
 }
 
+const showOrderHistoryModal = function () {
+  orderHistoryModal.classList.toggle('active');
+  orderHistoryModal.classList.toggle('hidden');
+};
+
 function toggleModalAccount() {
   modalAccount.classList.toggle('active');
   modalAccount.classList.toggle('hidden');
@@ -106,6 +113,7 @@ modalClose.forEach((icon) =>
     const insideShoppingCart = e.target.closest('#modal-shopping-cart');
     const insideConfirmRemoval = e.target.closest('#confirm-modal');
     const insideAccount = e.target.closest('#account-modal');
+    const insideOrderHistory = e.target.closest('#order-history-modal');
 
     if (insideSignIn) {
       toggleModalSignIn();
@@ -131,6 +139,9 @@ modalClose.forEach((icon) =>
     if (insideAccount) {
       toggleModalAccount();
       shoppingCartBtn.classList.toggle('modal-open');
+    }
+    if (insideOrderHistory) {
+      showOrderHistoryModal();
     }
   })
 );

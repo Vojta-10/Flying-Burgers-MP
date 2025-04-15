@@ -14,7 +14,9 @@ const makeAnOrder = async (req, res) => {
       .json({ msg: 'Delivery address is required.' });
   }
 
-  const order = await Order.create({ ...req.body });
+  const { userId } = req.user;
+
+  const order = await Order.create({ user: userId, ...req.body });
   res.status(StatusCodes.CREATED).json({ order });
 };
 
