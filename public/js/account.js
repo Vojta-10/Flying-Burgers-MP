@@ -115,10 +115,13 @@ const registerUser = async function () {
     if (password.length < 5) {
       throw new Error('Password must be longer than 5 characters');
     }
-    const { data } = await axios.post('http://localhost:3000/auth/register', {
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      'https://flyingburgers.onrender.com/auth/register',
+      {
+        email,
+        password,
+      }
+    );
     return data;
   } catch (error) {
     errorUISignup(error);
@@ -150,10 +153,13 @@ const loginUser = async function () {
   try {
     const email = emailSigninInput.value.trim();
     const password = passwordSigninInput.value.trim();
-    const { data } = await axios.post('http://localhost:3000/auth/login', {
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      'https://flyingburgers.onrender.com/auth/login',
+      {
+        email,
+        password,
+      }
+    );
     return data;
   } catch (error) {
     errorUISignin(error);
@@ -181,7 +187,7 @@ const userUpdateAddress = async function () {
     const postCity = postCityInput.value.trim();
     const token = localStorage.getItem('token');
     const { data } = await axios.patch(
-      'http://localhost:3000/user/update-address',
+      'https://flyingburgers.onrender.com/user/update-address',
       {
         streetNo,
         postCity,
@@ -218,7 +224,7 @@ const orderHistory = async () => {
   const token = localStorage.getItem('token');
   const {
     data: { orders },
-  } = await axios.get('http://localhost:3000/order-history', {
+  } = await axios.get('https://flyingburgers.onrender.com/order/history', {
     headers: {
       Authorization: token,
     },

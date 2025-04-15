@@ -33,9 +33,7 @@ const confirmOrder = async () => {
     const paymentMethod = document
       .getElementById('summary-payment')
       .textContent.toLowerCase();
-    const address = document
-      .getElementById('summary-address')
-      .textContent;
+    const address = document.getElementById('summary-address').textContent;
     const deliveryFee = Number(
       parseInt(document.getElementById('summary-fee').textContent.split(' ')[0])
     );
@@ -46,7 +44,7 @@ const confirmOrder = async () => {
     );
     console.log(deliveryFee, totalPrice);
     const { data } = await axios.post(
-      'http://localhost:3000/order',
+      'https://flyingburgers.onrender.com/order/make-an-order',
       {
         items: [...cleanedCart],
         totalPrice,
@@ -85,7 +83,7 @@ const onload = async () => {
       data: {
         user: { address },
       },
-    } = await axios.get('http://localhost:3000/user/me', {
+    } = await axios.get('https://flyingburgers.onrender.com/user/me', {
       headers: {
         Authorization: token,
       },
