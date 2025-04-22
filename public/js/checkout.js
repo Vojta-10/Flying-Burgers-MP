@@ -10,6 +10,7 @@ const finalizeBtn = document.querySelector('.finish-order-btn');
 const modalReviewOrder = document.getElementById('modal-order-summary');
 const modalClose = document.querySelector('.close-icon');
 const cancelReviewBtn = document.querySelector('.cancel-modal-btn');
+const backBtn = document.querySelector('.back-btn');
 const confirmOrderBtn = document.querySelector('.confirm-order-btn');
 const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
 const savedTotal = JSON.parse(localStorage.getItem('totalPrice')) || 0;
@@ -64,11 +65,6 @@ const confirmOrder = async () => {
     console.log(error);
   }
 };
-
-confirmOrderBtn.addEventListener('click', async () => {
-  const data = await confirmOrder();
-  console.log(data);
-});
 
 const onload = async () => {
   try {

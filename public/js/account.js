@@ -21,7 +21,7 @@ const updateBtn = document.querySelector('.update-btn');
 const orderHistoryBtn = document.querySelector('.order-history-btn');
 const orderHistoryModal = document.getElementById('order-history-modal');
 
-const UIRequestSignin = function (token, email) {
+const UIRequestSignup = function (token, email) {
   localStorage.setItem('token', `Bearer ${token}`);
   signupMsg.classList.remove('hidden');
   signupMsg.textContent = 'Success!';
@@ -34,7 +34,7 @@ const UIRequestSignin = function (token, email) {
     showAccountUI(email);
   }, 1000);
 };
-const UIRequestSignup = function (token, email) {
+const UIRequestSignin = function (token, email) {
   localStorage.setItem('token', `Bearer ${token}`);
   signinMsg.classList.remove('hidden');
   signinMsg.textContent = 'Success!';
@@ -135,7 +135,7 @@ signupForm.addEventListener('submit', async (e) => {
       user: { email },
       token,
     } = await registerUser();
-    UIRequestSignin(token, email);
+    UIRequestSignup(token, email);
   } catch (error) {
     console.log(error);
   }
@@ -173,7 +173,7 @@ signinForm.addEventListener('submit', async (e) => {
       user: { email },
       token,
     } = await loginUser();
-    UIRequestSignup(token, email);
+    UIRequestSignin(token, email);
   } catch (error) {
     console.log(error);
   }

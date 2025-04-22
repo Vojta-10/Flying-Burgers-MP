@@ -333,3 +333,13 @@ body {
     font-size: 0.9rem;
   }
 }
+
+@media (min-width: 768px) {
+  .checkout-summary .summary-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .checkout-summary .checkout-cart-item {
+    width: 30%;
+  }
+}
