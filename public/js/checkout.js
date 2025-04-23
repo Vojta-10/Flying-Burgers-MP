@@ -66,6 +66,11 @@ const confirmOrder = async () => {
   }
 };
 
+confirmOrderBtn.addEventListener('click', async function () {
+  const order = await confirmOrder();
+  console.log(order);
+});
+
 const onload = async () => {
   try {
     const token = localStorage.getItem('token');
